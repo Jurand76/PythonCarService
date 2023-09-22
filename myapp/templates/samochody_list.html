@@ -1,11 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Samochody lista</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Lista samochodów</h1>
-    <ul>
+    <h1 class="font_nunito bold_text text_48 color_white">Lista samochodów</h1>
+    <ul class="font_nunito light_text text_24 color_white">
         {% for samochod in samochody %}
         <li>Marka : {{ samochod.marka }}</li>
         <li>Model : {{ samochod.model }}</li>
