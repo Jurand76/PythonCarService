@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Samochody lista</title>
+</head>
+<body>
+    <h1>Lista samochodów</h1>
+    <ul>
+        {% for samochod in samochody %}
+        <li>Marka : {{ samochod.marka }}</li>
+        <li>Model : {{ samochod.model }}</li>
+        <li>Nr VIN: {{ samochod.nrvin }}</li>
+        <li>Nr rej: {{ samochod.nrrej }}</li>
+        <li>Wlasciciel: {% if samochod.wlasciciel %}{{ samochod.wlasciciel.imie }} {{ samochod.wlasciciel.nazwisko }}{% else %}None{% endif %}</li>
+        <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>
