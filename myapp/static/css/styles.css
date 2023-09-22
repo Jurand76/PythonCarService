@@ -1,16 +1,19 @@
 body {
     background-color: #000000;
-    padding: 20px;
     margin: 0 0;
     background-image: url('../images/background_homepage.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 h1 {
-    margin: 0 0;
+    margin: 0 20;
 }
 
 .color_white {
@@ -21,15 +24,15 @@ h1 {
     font-family: 'Nunito', sans-serif;
 }
 
-.text_14 {
+.size_14 {
     font-size: 14px;
 }
 
-.text_24 {
+.size_24 {
     font-size: 24px;
 }
 
-.text_48 {
+.size_48 {
     font-size: 48px;
 }
 
@@ -43,4 +46,35 @@ h1 {
 
 .bold-text {
     font-weight: 900;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 660px;
+    margin-bottom: 110px;
+}
+
+.block {
+    width: 240px;
+    height: 240px;
+    background-color: rgba(169, 169, 169, 0.6);
+    margin: 20px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border-color: darkgray;
+    border-width: 2px;
+    border-style: solid;
+
+}
+
+.block:hover {
+    transform: scale(1.1333); /* 170/150 = 1.1333 */
+    background-color: rgba(119, 169, 119, 0.8);
 }
