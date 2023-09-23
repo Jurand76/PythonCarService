@@ -3,23 +3,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Samochody lista</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Baza samochodów</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/samochody.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="font_nunito bold_text size_48 color_white">Lista samochodów</h1>
-    <ul class="font_nunito light_text size_24 color_white">
+    <h1 class="font_nunito bold_text size_48 color_white">Baza samochodów</h1>
+
+    <form method="get" action="{% url 'search_samochody' %}">
+        <input type="text" name="q" placeholder="Wyszukaj samochody..." value="{{ request.GET.q }}">
+        <button type="submit">Wyszukaj</button>
+    </form>
+
+    <div class="result-box font_nunito light_text size_18 color_white">
         {% for samochod in samochody %}
-        <li>Marka : {{ samochod.marka }}</li>
-        <li>Model : {{ samochod.model }}</li>
-        <li>Nr VIN: {{ samochod.nrvin }}</li>
-        <li>Nr rej: {{ samochod.nrrej }}</li>
-        <li>Wlasciciel: {% if samochod.wlasciciel %}{{ samochod.wlasciciel.imie }} {{ samochod.wlasciciel.nazwisko }}{% else %}None{% endif %}</li>
-        <br>
+        <div class="result-item" onclick="window.location='{% url 'edit_samochod' samochod.id %}'">
+             <div>{{ samochod.marka }} </div>
+             <div>{{ samochod.model }}</div>
+             <div><span class="size_14">VIN:</span><br> {{ samochod.nrvin }}</div>
+             <div><span class="size_14">Nr rej:</span><br> {{ samochod.nrrej }}</div>
+             <div>{% if samochod.wlasciciel %}{{ samochod.wlasciciel.imie }} {{ samochod.wlasciciel.nazwisko }}{% else %}None{% endif %}</div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+    <div class="actions">
+    <a href="{% url 'add_samochod' %}" class="btn btn-primary">Dodaj Samochod</a>
+
+</div>
 </body>
 </html>

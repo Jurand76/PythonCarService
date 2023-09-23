@@ -134,7 +134,7 @@ class DjangoSession(models.Model):
 
 
 class Samochody(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     marka = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS')
     model = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
     nrvin = models.CharField(db_column='nrVIN', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
@@ -144,6 +144,7 @@ class Samochody(models.Model):
     class Meta:
         managed = False
         db_table = 'samochody'
+        ordering = ['-id']
 
 
 class Wlasciciele(models.Model):

@@ -1,0 +1,87 @@
+body {
+    background-color: #000000;
+    margin: 0 0;
+    background-image: url('../images/background_homepage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0 20;
+}
+
+.color_white {
+    color: #FFFFFF;
+}
+
+.font_nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+.size_14 {
+    font-size: 14px;
+}
+
+.size_18 {
+    font-size: 18px;
+}
+
+.size_24 {
+    font-size: 24px;
+}
+
+.size_48 {
+    font-size: 48px;
+}
+
+.light-text {
+    font-weight: 300;
+}
+
+.normal-text {
+    font-weight: 400;
+}
+
+.bold-text {
+    font-weight: 900;
+}
+
+.result-box {
+    height: 100vh;
+    width: 800px;
+}
+
+.result-item {
+    background-color: rgba(49, 49, 49, 0.8);
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.result-item div {
+    flex: 1;
+    text-align: center;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.result-item:hover {
+    background-color: rgba(119, 169, 119, 0.85);
+}
+
+
+
+
