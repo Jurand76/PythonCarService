@@ -131,6 +131,11 @@ h1 {
     background-size: cover;
 }
 
+.orders {
+    background-image: url('../images/orders.jpg');
+    background-size: cover;
+}
+
 .margin-120 {
     margin-top: 120px;
 }
