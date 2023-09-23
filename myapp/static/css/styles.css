@@ -1,38 +1,73 @@
 body {
-    background-color: #000000;
+    background-color: #C0C0C0;
     margin: 0 0;
-    background-image: url('../images/background_homepage.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
     display: flex;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
     flex-direction: column;
 }
+
+.header {
+    background-color: #e9e7e2;
+    height: 40px;
+    width: 1200px
+}
+
+.header-text {
+    height: 40px;
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 4px;
+}
+
+.main-block {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    height: 622px;
+    width: 1200px;
+    background-image: url('../images/porsche_1200px.jpg');
+}
+
+.bottom-block {
+    background-color: #282828;
+    height: 40px;
+    width: 1200px
+}
+
+.footer {
+    background-color: #000000;
+    height: 240px;
+    width: 1200px
+}
+
 
 h1 {
     margin: 0 20;
 }
 
-.color_white {
+.color-white {
     color: #FFFFFF;
 }
 
-.font_nunito {
+.font-nunito {
     font-family: 'Nunito', sans-serif;
 }
 
-.size_14 {
+.size-14 {
     font-size: 14px;
 }
 
-.size_24 {
+.size-18 {
+    font-size: 18px;
+}
+
+.size-24 {
     font-size: 24px;
 }
 
-.size_48 {
+.size-48 {
     font-size: 48px;
 }
 
@@ -53,9 +88,9 @@ h1 {
     flex-grow: 1;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
-    width: 660px;
-    margin-bottom: 110px;
+    align-content: flex-end;
+    width: 850px;
+    margin-bottom: -50px;
 }
 
 .container a {
@@ -63,8 +98,8 @@ h1 {
 }
 
 .block {
-    width: 240px;
-    height: 240px;
+    width: 160px;
+    height: 160px;
     background-color: rgba(119, 119, 119, 0.8);
     margin: 20px;
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -72,9 +107,36 @@ h1 {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    border-color: darkgray;
+    border-color: #806010;
     border-width: 2px;
     border-style: solid;
+}
+
+.front {
+    z-index: 6
+}
+
+.customer {
+    background-image: url('../images/customer.jpg');
+    background-size: cover;
+}
+
+.parts {
+    background-image: url('../images/engine.jpg');
+    background-size: cover;
+}
+
+.cars {
+    background-image: url('../images/cars.jpg');
+    background-size: cover;
+}
+
+.margin-120 {
+    margin-top: 120px;
+}
+
+.outer-black {
+    text-shadow: 0px 0px 4px black;
 }
 
 .block:hover {
