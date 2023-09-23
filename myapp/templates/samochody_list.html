@@ -12,10 +12,18 @@
 <body>
     <h1 class="font_nunito bold_text size_48 color_white">Baza samochodów</h1>
 
-    <form method="get" action="{% url 'search_samochody' %}">
-        <input type="text" name="q" placeholder="Wyszukaj samochody..." value="{{ request.GET.q }}">
-        <button type="submit">Wyszukaj</button>
-    </form>
+    <div class="search-block">
+        <form method="get" action="{% url 'search_samochody' %}">
+            <input class="font_nunito size_18" type="text" name="q" placeholder="wyszukaj samochód..." value="{{ request.GET.q }}">
+            <button class="font_nunito size_18" type="submit">Wyszukaj</button>
+        </form>
+    </div>
+
+    <div class="add-new-block">
+        <form action="{% url 'add_samochod' %}" method="get">
+            <button class="font_nunito size_18" type="submit" class="btn btn-primary">Dodaj Samochod</button>
+        </form>
+    </div>
 
     <div class="result-box font_nunito light_text size_18 color_white">
         {% for samochod in samochody %}
@@ -28,9 +36,6 @@
         </div>
         {% endfor %}
     </div>
-    <div class="actions">
-    <a href="{% url 'add_samochod' %}" class="btn btn-primary">Dodaj Samochod</a>
 
-</div>
 </body>
 </html>

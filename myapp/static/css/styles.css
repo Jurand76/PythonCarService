@@ -65,7 +65,7 @@ h1 {
 .block {
     width: 240px;
     height: 240px;
-    background-color: rgba(169, 169, 169, 0.6);
+    background-color: rgba(119, 119, 119, 0.8);
     margin: 20px;
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
     display: flex;
@@ -80,4 +80,8 @@ h1 {
 .block:hover {
     transform: scale(1.1333); /* 170/150 = 1.1333 */
     background-color: rgba(119, 169, 119, 0.8);
+}
+
+button:hover {
+    background-color: green;
 }

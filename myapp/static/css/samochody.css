@@ -53,14 +53,18 @@ h1 {
 }
 
 .result-box {
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
     width: 800px;
 }
 
 .result-item {
     background-color: rgba(49, 49, 49, 0.8);
     padding: 5px;
-    margin: 10px 0;
+    margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
     width: 800px;
@@ -80,6 +84,22 @@ h1 {
 
 .result-item:hover {
     background-color: rgba(119, 169, 119, 0.85);
+}
+
+.search-block {
+    padding: 10px;
+}
+
+.search-block button:hover {
+    background-color: rgba(119, 199, 119, 1)
+}
+
+.add-new-block {
+    padding: 10px;
+}
+
+.add-new-block button:hover {
+    background-color: rgba(119, 199, 119, 1)
 }
 
 
