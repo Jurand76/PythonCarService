@@ -148,7 +148,7 @@ class Samochody(models.Model):
 
 
 class Wlasciciele(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     imie = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS')
     nazwisko = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS')
     adres = models.CharField(max_length=80, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
@@ -158,3 +158,4 @@ class Wlasciciele(models.Model):
     class Meta:
         managed = False
         db_table = 'wlasciciele'
+        ordering = ['-id']

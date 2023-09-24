@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baza właścicieli</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/wlasciciele.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-text font-nunito color-black size-24 bold-text">Klienci - właściciele samochodów</div>
+    </div>
+
+    <div class="main-block">
+        <div class="search-block">
+            <form method="get" action="{% url 'search_wlasciciele' %}">
+                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj właściciela..." value="{{ request.GET.q }}">
+                <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+            </form>
+        </div>
+
+        <div class="add-new-block">
+            <form action="{% url 'add_wlasciciel' %}" method="get">
+                <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj Właściciela</button>
+            </form>
+        </div>
+
+        <div class="result-box font-nunito light-text size-18 color-white">
+            {% for wlasciciel in wlasciciele %}
+                <div class="result-item" onclick="window.location='{% url 'edit_wlasciciel' wlasciciel.id %}'">
+                    <div>{{ wlasciciel.imie }} {{wlasciciel.nazwisko}}</div>
+                    <div><span class="size-14">tel:</span><br> {{ wlasciciel.telefon }}</div>
+                    <div><span class="size-14">email:</span><br> {{ wlasciciel.email }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+</body>
+</html>

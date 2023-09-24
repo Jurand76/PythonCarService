@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} Właściciela</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} Właściciela</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zapisz</button>
+    </form>
+    <a href="{% url 'view_samochody' %}">Powrót do Właścicieli</a>
+</body>
+</html>
