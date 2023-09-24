@@ -21,7 +21,7 @@ def add_samochod(request):
         form = SamochodForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('view_samochody_list')
+            return redirect('view_samochody')
     else:
         form = SamochodForm()
     return render(request, 'add_edit_samochod.html', {'form': form})
@@ -49,6 +49,10 @@ def search_samochody(request):
         )
     return render(request, 'samochody_list.html', {'samochody': samochody})
 
+def search_samochody_wlasciciela(request, wlasciciel_id):
+    samochody = Samochody.objects.filter(wlasciciel_id=wlasciciel_id)
+    return render(request, 'samochody_list.html', {'samochody': samochody})
+
 def view_wlasciciele(request):
     wlasciciele = Wlasciciele.objects.all()
     context = {
@@ -61,7 +65,7 @@ def add_wlasciciel(request):
         form = WlascicielForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('view_wlasciciele_list')
+            return redirect('view_wlasciciele')
     else:
         form = WlascicielForm()
     return render(request, 'add_edit_wlasciciel.html', {'form': form})

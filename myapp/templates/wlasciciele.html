@@ -30,7 +30,8 @@
 
         <div class="result-box font-nunito light-text size-18 color-white">
             {% for wlasciciel in wlasciciele %}
-                <div class="result-item" onclick="window.location='{% url 'edit_wlasciciel' wlasciciel.id %}'">
+                <div class="result-item" onclick="window.location='{% url 'search_samochody_wlasciciela' wlasciciel.id %}'">
+                    <span class="id-wlasciciel size-14">{{ wlasciciel.id }}</span>
                     <div>{{ wlasciciel.imie }} {{wlasciciel.nazwisko}}</div>
                     <div><span class="size-14">tel:</span><br> {{ wlasciciel.telefon }}</div>
                     <div><span class="size-14">email:</span><br> {{ wlasciciel.email }}</div>

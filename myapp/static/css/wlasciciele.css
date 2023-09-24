@@ -29,7 +29,7 @@ body {
     background-color: black;
     height: 862px;
     width: 1200px;
-    background-image: url('../images/cars_background.jpg');
+    background-image: url('../images/customers_background.jpg');
 }
 
 .footer {
@@ -110,6 +110,12 @@ h1 {
 
 .result-item:hover {
     background-color: rgba(119, 169, 119, 0.85);
+}
+
+.id-wlasciciel {
+    width: 30px;
+    margin-left: 5px;
+    margin-top: -24px;
 }
 
 .search-block {
