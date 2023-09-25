@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baza części</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/czesci.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-text font-nunito color-black size-24 bold-text">Części - magazyn</div>
+    </div>
+
+    <div class="main-block">
+        <div class="search-block">
+            <form method="get" action="{% url 'search_wlasciciele' %}">
+                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj część..." value="{{ request.GET.q }}">
+                <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+            </form>
+        </div>
+
+        <div class="add-new-block">
+            <form action="{% url 'add_czesc' %}" method="get">
+                <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj Część</button>
+            </form>
+        </div>
+
+        <div class="result-box font-nunito light-text size-14 color-white">
+            <table class="results-table font-nunito size-14">
+                <thead>
+                    <tr class="header-row">
+                        <th class="header-item">Lp.</th>
+                        <th class="header-item">Nazwa</th>
+                        <th class="header-item">Ilość</th>
+                        <th class="header-item">Cena jednostkowa</th>
+                        <th class="header-item">Stawka VAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for czesc in czesci %}
+                        <tr class="data-row size-14">
+                            <td class="data-item">{{ czesc.id }}</td>
+                            <td class="data-item">{{ czesc.nazwa }}</td>
+                            <td class="data-item">{{ czesc.ilosc }} {{ czesc.jednostka }}</td>
+                            <td class="data-item">{{ czesc.cena_zakupu }} PLN</td>
+                            <td class="data-item">{{ czesc.stawka }}%</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+</body>
+</html>

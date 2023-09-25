@@ -1,0 +1,162 @@
+body {
+    background-color: #C0C0C0;
+    margin: 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #e9e7e2;
+    height: 40px;
+    width: 1200px
+}
+
+.header-text {
+    height: 40px;
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 4px;
+}
+
+.main-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    height: 862px;
+    width: 1200px;
+    background-image: url('../images/parts_background.jpg');
+}
+
+.footer {
+    background-color: #000000;
+    height: 40px;
+    width: 1200px
+}
+
+h1 {
+    margin: 0 20;
+}
+
+.color-white {
+    color: #FFFFFF;
+}
+
+.font-nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+.size-10 {
+    font-size: 10px;
+}
+
+.size-14 {
+    font-size: 14px;
+}
+
+.size-18 {
+    font-size: 18px;
+}
+
+.size-24 {
+    font-size: 24px;
+}
+
+.size-48 {
+    font-size: 48px;
+}
+
+.light-text {
+    font-weight: 300;
+}
+
+.normal-text {
+    font-weight: 400;
+}
+
+.bold-text {
+    font-weight: 900;
+}
+
+.result-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 57vh;
+    width: 800px;
+}
+
+.results-table {
+    width: 900px;
+    border-collapse: collapse;  /* Optional: for better border styling */
+    background-color: rgba(65, 65, 65, 0.8);
+}
+
+.results-table .header-item {
+    background-color: rgba(35, 35, 35, 0.8);
+    border: 1px solid #000;  /* Optional: Add border to cells */
+    text-align: left;  /* Optional: Align text to the left */
+    padding: 8px;  /* Optional: Add some padding */
+}
+
+
+.results-table .data-item {
+    border: 1px solid #000;  /* Optional: Add border to cells */
+    text-align: left;  /* Optional: Align text to the left */
+    padding: 8px;  /* Optional: Add some padding */
+}
+
+.results-table .header-item:nth-child(1), .results-table .data-item:nth-child(1) { width: 50px; }
+.results-table .header-item:nth-child(2), .results-table .data-item:nth-child(2) { width: 500px; }
+.results-table .header-item:nth-child(3), .results-table .data-item:nth-child(3) { width: 100px; }
+.results-table .header-item:nth-child(4), .results-table .data-item:nth-child(4) { width: 150px; }
+.results-table .header-item:nth-child(5), .results-table .data-item:nth-child(5) { width: 100px; }
+
+.id-czesci {
+    width: 30px;
+    margin-left: 5px;
+    margin-top: -14px;
+}
+
+.search-block {
+    padding: 10px;
+}
+
+.search-block button {
+    border-radius: 10px;
+    padding: 4px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.search-block button:hover {
+    background-color: rgba(119, 199, 119, 1)
+}
+
+.add-new-block {
+    padding: 8px;
+    margin-bottom: 5px;
+    margin-top: -5px;
+}
+
+.add-new-block button {
+    border-radius: 10px;
+    padding: 4px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.add-new-block button:hover {
+    background-color: rgba(119, 199, 119, 1)
+}
+
+
+
+

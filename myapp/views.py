@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Samochody
-from .forms import SamochodForm, WlascicielForm
+from .models import Samochody, Czesci, Wlasciciele
+from .forms import SamochodForm, WlascicielForm, CzesciForm
 from django.db.models import Q
-from .models import Wlasciciele
+
 
 
 def home(request):
@@ -92,3 +92,20 @@ def search_wlasciciele(request):
             Q(email__icontains=query)
         )
     return render(request, 'wlasciciele.html', {'wlasciciele': wlasciciele})
+
+def view_czesci(request):
+    czesci = Czesci.objects.all()
+    context = {
+        'czesci': czesci
+    }
+    return render(request, 'czesci.html', context)
+
+def add_czesc(request):
+    if request.method == 'POST':
+        form = CzesciForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_czesci')
+    else:
+        form = CzesciForm()
+    return render(request, 'add_edit_czesc.html', {'form': form})

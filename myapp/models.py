@@ -78,9 +78,11 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Czesci(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nazwa = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
     cena_zakupu = models.DecimalField(max_digits=6, decimal_places=2)
+    jednostka = models.CharField(max_length=9, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    stawka = models.IntegerField()
     ilosc = models.IntegerField()
 
     class Meta:

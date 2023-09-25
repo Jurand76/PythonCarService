@@ -12,4 +12,6 @@ urlpatterns = [
     path('wlasciciele/add/', views.add_wlasciciel, name='add_wlasciciel'),
     path('wlasciciele/edit/<int:wlasciciel_id>/', views.edit_wlasciciel, name='edit_wlasciciel'),
     path('wlasciciele/search/', views.search_wlasciciele, name='search_wlasciciele'),
+    path('czesci/', views.view_czesci, name='view_czesci'),
+    path('czesci/add/', views.add_czesc, name='add_czesc'),
 ]
