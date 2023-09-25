@@ -37,6 +37,7 @@
                         <th class="header-item">Ilość</th>
                         <th class="header-item">Cena jednostkowa</th>
                         <th class="header-item">Stawka VAT</th>
+                        <th class="header-item">Operacje</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,7 @@
                             <td class="data-item">{{ czesc.ilosc }} {{ czesc.jednostka }}</td>
                             <td class="data-item">{{ czesc.cena_zakupu }} PLN</td>
                             <td class="data-item">{{ czesc.stawka }}%</td>
+                            <td class="data-item">+ -</td>
                         </tr>
                     {% endfor %}
                 </tbody>
