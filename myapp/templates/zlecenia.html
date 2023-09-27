@@ -17,7 +17,7 @@
     <div class="main-block">
         <div class="search-block">
             <form method="get" action="{% url 'search_zlecenia' %}">
-                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj część..." value="{{ request.GET.q }}">
+                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj zlecenie..." value="{{ request.GET.q }}">
                 <button class="font-nunito size-18" type="submit">Wyszukaj</button>
             </form>
         </div>
@@ -45,9 +45,9 @@
                         <tr class="data-row size-14">
                             <td class="data-item">{{ zlecenie.id }}</td>
                             <td class="data-item">{{ zlecenie.opis }}</td>
-                            <td class="data-item">{{ zlecenie.data_wprowadzenia }}</td>
-                            <td class="data-item">{{ zlecenie.data_rozpoczecia }}</td>
-                            <td class="data-item">{{ zlecenie.data_zakonczenia }}</td>
+                            <td class="data-item">{{ zlecenie.data_wprowadzenia|date:"Y-m-d"}}</td>
+                            <td class="data-item">{{ zlecenie.data_rozpoczecia|date:"Y-m-d"|default_if_none:"" }}</td>
+                            <td class="data-item">{{ zlecenie.data_zakonczenia|date:"Y-m-d"|default_if_none:"" }}</td>
                             <td class="data-item">+ -</td>
                         </tr>
                     {% endfor %}
