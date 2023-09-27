@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Samochody, Czesci, Wlasciciele
-from .forms import SamochodForm, WlascicielForm, CzesciForm
+from .models import Samochody, Czesci, Wlasciciele, Zlecenia
+from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm
 from django.db.models import Q
 
 
@@ -109,3 +109,42 @@ def add_czesc(request):
     else:
         form = CzesciForm()
     return render(request, 'add_edit_czesc.html', {'form': form})
+
+
+def search_czesci(request):
+    query = request.GET.get('q')
+    czesci = Czesci.objects.order_by('-id')[:10]  # Get the last 10 created items
+    if query:
+        czesci = Czesci.objects.filter(
+            Q(nazwa__icontains=query) |
+            Q(cena_zakupu__icontains=query)
+        )
+    return render(request, 'czesci.html', {'czesci': czesci})
+def view_zlecenia(request):
+    zlecenia = Zlecenia.objects.all()
+    context = {
+        'zlecenia': zlecenia
+    }
+    return render(request, 'zlecenia.html', context)
+
+def add_zlecenie(request):
+    if request.method == 'POST':
+        form = ZleceniaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_zlecenia')
+    else:
+        form = CzesciForm()
+    return render(request, 'add_edit_zlecenie.html', {'form': form})
+
+def search_zlecenia(request):
+    query = request.GET.get('q')
+    zlecenia = Zlecenia.objects.order_by('-id')[:10]  # Get the last 10 created items
+    if query:
+        zlecenia = Zlecenia.objects.filter(
+            Q(opis__icontains=query) |
+            Q(data_wprowadzenia__icontains=query) |
+            Q(data_rozpoczecia__icontains=query) |
+            Q(data_zakonczenia__icontains=query)
+        )
+    return render(request, 'zlecenia.html', {'zlecenia': zlecenia})

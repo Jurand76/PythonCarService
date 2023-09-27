@@ -77,19 +77,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Czesci(models.Model):
-    id = models.AutoField(primary_key=True)
-    nazwa = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
-    cena_zakupu = models.DecimalField(max_digits=6, decimal_places=2)
-    jednostka = models.CharField(max_length=9, db_collation='SQL_Latin1_General_CP1_CI_AS')
-    stawka = models.IntegerField()
-    ilosc = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'czesci'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
@@ -139,7 +126,8 @@ class Samochody(models.Model):
     id = models.AutoField(primary_key=True)
     marka = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS')
     model = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
-    nrvin = models.CharField(db_column='nrVIN', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    nrvin = models.CharField(db_column='nrVIN', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True,
+                             null=True)  # Field name made lowercase.
     nrrej = models.CharField(max_length=20, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     wlasciciel = models.ForeignKey('Wlasciciele', models.DO_NOTHING, db_column='wlasciciel', blank=True, null=True)
 
@@ -160,4 +148,31 @@ class Wlasciciele(models.Model):
     class Meta:
         managed = False
         db_table = 'wlasciciele'
+        ordering = ['-id']
+
+
+class Czesci(models.Model):
+    id = models.AutoField(primary_key=True)
+    nazwa = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    cena_zakupu = models.DecimalField(max_digits=6, decimal_places=2)
+    jednostka = models.CharField(max_length=9, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    stawka = models.IntegerField()
+    ilosc = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'czesci'
+
+
+class Zlecenia(models.Model):
+    id = models.AutoField(primary_key=True)
+    nr_samochodu = models.ForeignKey('Samochody', models.DO_NOTHING, db_column='nr_samochodu', blank=True, null=True)
+    data_wprowadzenia = models.DateField()
+    data_rozpoczecia = models.DateField()
+    data_zakonczenia = models.DateField()
+    opis = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS')
+
+    class Meta:
+        managed = False
+        db_table = 'zlecenia'
         ordering = ['-id']

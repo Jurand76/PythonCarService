@@ -1,5 +1,5 @@
 from django import forms
-from .models import Samochody, Wlasciciele, Czesci
+from .models import Samochody, Wlasciciele, Czesci, Zlecenia
 
 
 class SamochodForm(forms.ModelForm):
@@ -17,3 +17,8 @@ class CzesciForm(forms.ModelForm):
     class Meta:
         model = Czesci
         fields = ['nazwa', 'cena_zakupu', 'ilosc', 'jednostka', 'stawka']
+
+class ZleceniaForm(forms.ModelForm):
+    class Meta:
+        model = Zlecenia
+        fields = ['nr_samochodu', 'data_wprowadzenia', 'data_rozpoczecia', 'data_zakonczenia', 'opis']
