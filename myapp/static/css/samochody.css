@@ -146,6 +146,43 @@ h1 {
     background-color: rgba(119, 199, 119, 1)
 }
 
+.context-menu {
+    display: none;
+    position: absolute;
+    width: 150px;
+    text-align: center;
+    z-index: 1000;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.context-menu.active {
+    display: block;
+}
+
+.context-menu-item-edit {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.context-menu-item-edit:hover {
+    background-color: #007B00;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.context-menu-item-delete {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.context-menu-item-delete:hover {
+    background-color: #BB0000;
+    color: #fff;
+    border-radius: 8px;
+}
+
 
 
 

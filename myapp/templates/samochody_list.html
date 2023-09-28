@@ -30,7 +30,7 @@
 
         <div class="result-box font-nunito light-text size-18 color-white">
             {% for samochod in samochody %}
-                <div class="result-item" onclick="window.location='{% url 'search_zlecenia_dla_samochodu' samochod.id %}'">
+                <div class="result-item" onclick="window.location='{% url 'search_zlecenia_dla_samochodu' samochod.id %}';" oncontextmenu="showContextMenu(event, {{ samochod.id }}); return false;">
                     <div>{{ samochod.marka }} </div>
                     <div>{{ samochod.model }}</div>
                     <div><span class="size-14">VIN:</span><br> {{ samochod.nrvin }}</div>
@@ -39,9 +39,45 @@
                 </div>
             {% endfor %}
         </div>
+
+        <div id="context-menu" class="context-menu font-nunito">
+            <div class="context-menu-item-edit" onclick="editCar()">Edytuj</div>
+            <div class="context-menu-item-delete" onclick="deleteCar()">Usuń</div>
+        </div>
     </div>
 
     <div class="footer"></div>
+
+    <script>
+        var currentCarId = null;
+
+        function showContextMenu(event, carId) {
+            event.preventDefault();
+            var menu = document.getElementById('context-menu');
+            menu.style.left = event.pageX + 'px';
+            menu.style.top = event.pageY + 'px';
+            menu.classList.add('active');
+            currentCarId = carId;
+        }
+
+        function hideContextMenu() {
+            var menu = document.getElementById('context-menu');
+            menu.classList.remove('active');
+        }
+
+        function editCar() {
+            window.location = '{% url 'edit_samochod' 0 %}'.replace('0', currentCarId);
+            hideContextMenu();
+        }
+
+        function deleteCar() {
+            // Tutaj można zaimplementować logikę usuwania
+            hideContextMenu();
+        }
+
+        // Ukryj menu kontekstowe, gdy użytkownik kliknie gdzie indziej
+        window.addEventListener('click', hideContextMenu);
+    </script>
 
 </body>
 </html>
