@@ -53,6 +53,14 @@ def search_samochody_wlasciciela(request, wlasciciel_id):
     samochody = Samochody.objects.filter(wlasciciel_id=wlasciciel_id)
     return render(request, 'samochody_list.html', {'samochody': samochody})
 
+def delete_samochod(request, samochod_id):
+    if request.method == 'POST':  # Upewnij się, że metoda żądania to POST
+        samochod = get_object_or_404(Samochody, id=samochod_id)
+        samochod.delete()
+        return redirect('view_samochody')  # Zastąp to odpowiednim URL do strony listy samochodów
+    else:
+        return HttpResponse("Niepoprawne żądanie", status=405)
+
 def view_wlasciciele(request):
     wlasciciele = Wlasciciele.objects.all()
     context = {

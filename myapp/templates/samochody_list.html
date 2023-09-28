@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <title>Baza samochodów</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/samochody.css' %}">
@@ -30,7 +30,7 @@
 
         <div class="result-box font-nunito light-text size-18 color-white">
             {% for samochod in samochody %}
-                <div class="result-item" onclick="window.location='{% url 'search_zlecenia_dla_samochodu' samochod.id %}';" oncontextmenu="showContextMenu(event, {{ samochod.id }}); return false;">
+                <div class="result-item" onclick="window.location='{% url 'search_zlecenia_dla_samochodu' samochod.id %}';" oncontextmenu="showContextMenu(event, {{ samochod.id }}, '{{ samochod.marka}}'); return false;">
                     <div>{{ samochod.marka }} </div>
                     <div>{{ samochod.model }}</div>
                     <div><span class="size-14">VIN:</span><br> {{ samochod.nrvin }}</div>
@@ -46,18 +46,29 @@
         </div>
     </div>
 
+    <div id="delete-modal" class="modal">
+        <div class="modal-content font-nunito size-18 normal-text">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <p id="delete-question"></p>
+            <button onclick="confirmDelete()">Usuń</button>
+            <button onclick="closeModal()">Anuluj</button>
+        </div>
+    </div>
+
     <div class="footer"></div>
 
     <script>
         var currentCarId = null;
 
-        function showContextMenu(event, carId) {
+        function showContextMenu(event, carId, carMarka) {
             event.preventDefault();
             var menu = document.getElementById('context-menu');
             menu.style.left = event.pageX + 'px';
             menu.style.top = event.pageY + 'px';
             menu.classList.add('active');
             currentCarId = carId;
+            currentCarMarka = carMarka;
+            console.log('currentCarId: ', currentCarId);
         }
 
         function hideContextMenu() {
@@ -71,8 +82,19 @@
         }
 
         function deleteCar() {
-            // Tutaj można zaimplementować logikę usuwania
-            hideContextMenu();
+            var modal = document.getElementById('delete-modal');
+            var question = document.getElementById('delete-question');
+            question.textContent = 'Czy na pewno chcesz usunąć samochód ' + currentCarMarka + ' ?';
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('delete-modal');
+            modal.style.display = "none";
+        }
+
+        function confirmDelete() {
+            window.location = '{% url 'delete_samochod' 0 %}'.replace('0', currentCarId);
         }
 
         // Ukryj menu kontekstowe, gdy użytkownik kliknie gdzie indziej
