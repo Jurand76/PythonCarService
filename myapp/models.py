@@ -171,6 +171,7 @@ class Zlecenia(models.Model):
     data_rozpoczecia = models.DateField()
     data_zakonczenia = models.DateField()
     opis = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    przebieg = models.IntegerField()
 
     class Meta:
         managed = False

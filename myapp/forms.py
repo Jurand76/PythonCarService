@@ -21,4 +21,4 @@ class CzesciForm(forms.ModelForm):
 class ZleceniaForm(forms.ModelForm):
     class Meta:
         model = Zlecenia
-        fields = ['nr_samochodu', 'data_wprowadzenia', 'data_rozpoczecia', 'data_zakonczenia', 'opis']
+        fields = ['nr_samochodu', 'data_wprowadzenia', 'data_rozpoczecia', 'data_zakonczenia', 'opis', 'przebieg']

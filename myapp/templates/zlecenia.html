@@ -32,7 +32,7 @@
             <table class="results-table font-nunito size-14">
                 <thead>
                     <tr class="header-row">
-                        <th class="header-item">Lp.</th>
+                        <th class="header-item">Id</th>
                         <th class="header-item">Opis</th>
                         <th class="header-item">Wprowadzono</th>
                         <th class="header-item">Rozpoczęto</th>
@@ -44,7 +44,10 @@
                     {% for zlecenie in zlecenia %}
                         <tr class="data-row size-14">
                             <td class="data-item">{{ zlecenie.id }}</td>
-                            <td class="data-item">{{ zlecenie.opis }}</td>
+                            <td class="data-item">
+                                <span class="color-orange size-12">{{ zlecenie.nr_samochodu.marka }} {{ zlecenie.nr_samochodu.model }},
+                                                                   rej: {{ zlecenie.nr_samochodu.nrrej }}, przebieg: {{ zlecenie.przebieg }}km</span><br>
+                                {{ zlecenie.opis }}</td>
                             <td class="data-item">{{ zlecenie.data_wprowadzenia|date:"Y-m-d"}}</td>
                             <td class="data-item">{{ zlecenie.data_rozpoczecia|date:"Y-m-d"|default_if_none:"" }}</td>
                             <td class="data-item">{{ zlecenie.data_zakonczenia|date:"Y-m-d"|default_if_none:"" }}</td>
