@@ -148,13 +148,9 @@ def search_zlecenia(request):
             Q(data_zakonczenia__icontains=query)
         )
 
-    samochody = Samochody.objects.all()
-    samochody_dict = {samochod.id: samochod for samochod in samochody}
+    return render(request, 'zlecenia.html', {'zlecenia': zlecenia})
 
-    for zlecenie in zlecenia:
-        samochod = samochody_dict.get(zlecenie.nr_samochodu)
-        if samochod:
-            zlecenie.samochod_marka = samochod.marka
-            zlecenie.samochod_nr_rej = samochod.nr_rej
-
+def search_zlecenia_dla_samochodu(request, samochod_id):
+    samochod = get_object_or_404(Samochody, id=samochod_id)
+    zlecenia = Zlecenia.objects.filter(nr_samochodu=samochod)
     return render(request, 'zlecenia.html', {'zlecenia': zlecenia})

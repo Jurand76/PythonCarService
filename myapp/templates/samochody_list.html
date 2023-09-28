@@ -30,7 +30,7 @@
 
         <div class="result-box font-nunito light-text size-18 color-white">
             {% for samochod in samochody %}
-                <div class="result-item" onclick="window.location='{% url 'edit_samochod' samochod.id %}'">
+                <div class="result-item" onclick="window.location='{% url 'search_zlecenia_dla_samochodu' samochod.id %}'">
                     <div>{{ samochod.marka }} </div>
                     <div>{{ samochod.model }}</div>
                     <div><span class="size-14">VIN:</span><br> {{ samochod.nrvin }}</div>
