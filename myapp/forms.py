@@ -6,6 +6,11 @@ class SamochodForm(forms.ModelForm):
     class Meta:
         model = Samochody
         fields = ['marka', 'model', 'nrvin', 'nrrej', 'wlasciciel']
+        labels = {
+            'nrvin': 'Numer nadwozia',
+            'wlasciciel': 'Właściciel',
+            'nrrej': 'Numer rejestracyjny'
+        }
 
 
 class WlascicielForm(forms.ModelForm):
