@@ -35,7 +35,7 @@
                     <div>{{ samochod.model }}</div>
                     <div><span class="size-14">VIN:</span><br> {{ samochod.nrvin }}</div>
                     <div><span class="size-14">Nr rej:</span><br> {{ samochod.nrrej }}</div>
-                    <div>{% if samochod.wlasciciel %}{{ samochod.wlasciciel.imie }} {{ samochod.wlasciciel.nazwisko }}{% else %}None{% endif %}</div>
+                    <div>{% if samochod.wlasciciel %}{{ samochod.wlasciciel.nazwisko }} {{ samochod.wlasciciel.imie }}{% else %}None{% endif %}</div>
                 </div>
             {% endfor %}
         </div>

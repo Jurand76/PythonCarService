@@ -11,6 +11,9 @@ class SamochodForm(forms.ModelForm):
             'wlasciciel': 'Właściciel',
             'nrrej': 'Numer rejestracyjny'
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['wlasciciel'].queryset = Wlasciciele.objects.order_by('nazwisko')
 
 
 class WlascicielForm(forms.ModelForm):
