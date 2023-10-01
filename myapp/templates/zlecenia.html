@@ -23,7 +23,7 @@
         </div>
 
         <div class="add-new-block">
-            <form action="{% url 'add_czesc' %}" method="get">
+            <form action="{% url 'add_zlecenie' %}" method="get">
                 <button class="font-nunito size-18" type="submit" class="btn btn-primary">Nowe zlecenie</button>
             </form>
         </div>
@@ -48,9 +48,9 @@
                                 <span class="color-orange size-12">{{ zlecenie.nr_samochodu.marka }} {{ zlecenie.nr_samochodu.model }},
                                                                    rej: {{ zlecenie.nr_samochodu.nrrej }}, przebieg: {{ zlecenie.przebieg }}km</span><br>
                                 {{ zlecenie.opis }}</td>
-                            <td class="data-item">{{ zlecenie.data_wprowadzenia|date:"Y-m-d"}}</td>
-                            <td class="data-item">{{ zlecenie.data_rozpoczecia|date:"Y-m-d"|default_if_none:"" }}</td>
-                            <td class="data-item">{{ zlecenie.data_zakonczenia|date:"Y-m-d"|default_if_none:"" }}</td>
+                            <td class="data-item">{{ zlecenie.czas_wprowadzenia|date:"Y-m-d"}}</td>
+                            <td class="data-item">{{ zlecenie.czas_rozpoczecia|date:"Y-m-d"|default_if_none:"" }}</td>
+                            <td class="data-item">{{ zlecenie.czas_zakonczenia|date:"Y-m-d"|default_if_none:"" }}</td>
                             <td class="data-item">+ -</td>
                         </tr>
                     {% endfor %}

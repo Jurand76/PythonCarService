@@ -142,7 +142,7 @@ def add_zlecenie(request):
             form.save()
             return redirect('view_zlecenia')
     else:
-        form = CzesciForm()
+        form = ZleceniaForm()
     return render(request, 'add_edit_zlecenie.html', {'form': form})
 
 def search_zlecenia(request):

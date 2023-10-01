@@ -16,9 +16,9 @@ class WlascicielForm(forms.ModelForm):
 class CzesciForm(forms.ModelForm):
     class Meta:
         model = Czesci
-        fields = ['nazwa', 'cena_zakupu', 'ilosc', 'jednostka', 'stawka']
+        fields = ['nazwa', 'cena_zakupu', 'ilosc', 'jednostka', 'stawka_vat']
 
 class ZleceniaForm(forms.ModelForm):
     class Meta:
         model = Zlecenia
-        fields = ['nr_samochodu', 'data_wprowadzenia', 'data_rozpoczecia', 'data_zakonczenia', 'opis', 'przebieg']
+        fields = ['nr_samochodu', 'czas_wprowadzenia', 'czas_rozpoczecia', 'czas_zakonczenia', 'opis', 'przebieg']
