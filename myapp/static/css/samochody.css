@@ -113,7 +113,11 @@ h1 {
 }
 
 .search-block {
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 67%;
+    margin-bottom: 10px;
 }
 
 .search-block button {
@@ -128,10 +132,18 @@ h1 {
     background-color: rgba(119, 199, 119, 1)
 }
 
-.add-new-block {
-    padding: 8px;
-    margin-bottom: 5px;
-    margin-top: -5px;
+.search-block form:first-child {
+    margin: auto;
+}
+
+.form-wrapper {
+    /* Additional styling if needed */
+    width: 50%; /* Adjust this value to meet your design requirements */
+    text-align: center; /* Center the contents of the form */
+}
+
+.add-button-wrapper {
+    /* Additional styling if needed */
 }
 
 .add-new-block button {

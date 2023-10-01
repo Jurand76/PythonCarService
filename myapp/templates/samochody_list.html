@@ -16,16 +16,17 @@
 
     <div class="main-block">
         <div class="search-block">
-            <form method="get" action="{% url 'search_samochody' %}">
-                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj samochód..." value="{{ request.GET.q }}">
-                <button class="font-nunito size-18" type="submit">Wyszukaj</button>
-            </form>
-        </div>
-
-        <div class="add-new-block">
-            <form action="{% url 'add_samochod' %}" method="get">
-                <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj Samochod</button>
-            </form>
+            <div class="form-wrapper">
+                <form method="get" action="{% url 'search_samochody' %}">
+                    <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj samochód..." value="{{ request.GET.q }}">
+                    <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+                </form>
+            </div>
+            <div class="add-button-wrapper">
+                <form action="{% url 'add_samochod' %}" method="get">
+                    <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj Samochod</button>
+                </form>
+            </div>
         </div>
 
         <div class="result-box font-nunito light-text size-18 color-white">
@@ -50,8 +51,12 @@
         <div class="modal-content font-nunito size-18 normal-text">
             <span class="close-button" onclick="closeModal()">×</span>
             <p id="delete-question"></p>
-            <button onclick="confirmDelete()">Usuń</button>
-            <button onclick="closeModal()">Anuluj</button>
+            <form id="delete-form" method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="samochod_id" id="delete-samochod-id">
+            <button type="button" onclick="confirmDelete()">Usuń</button>
+            <button type="button" onclick="closeModal()">Anuluj</button>
+        </form>
         </div>
     </div>
 
@@ -94,7 +99,21 @@
         }
 
         function confirmDelete() {
-            window.location = '{% url 'delete_samochod' 0 %}'.replace('0', currentCarId);
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{% url 'delete_samochod' 0 %}'.replace('0', currentCarId);
+            form.style.display = 'none';
+
+            // Include the CSRF token
+            var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'csrfmiddlewaretoken';
+            input.value = csrfToken;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
         }
 
         // Ukryj menu kontekstowe, gdy użytkownik kliknie gdzie indziej
