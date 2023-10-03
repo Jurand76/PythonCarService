@@ -19,8 +19,8 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Zapisz</button>
+            <a href="{% url 'view_samochody' %}" class="button">Powrót</a>
         </form>
-        <a href="{% url 'view_samochody' %}">Powrót do Samochodów</a>
     </div>
 </body>
 </html>

@@ -139,23 +139,12 @@ h1 {
 .form-wrapper {
     /* Additional styling if needed */
     width: 50%; /* Adjust this value to meet your design requirements */
-    text-align: center; /* Center the contents of the form */
+    text-align: left; /* Center the contents of the form */
 }
 
 .add-button-wrapper {
-    /* Additional styling if needed */
-}
-
-.add-new-block button {
-    border-radius: 10px;
-    padding: 4px;
-    margin-left: 10px;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.add-new-block button:hover {
-    background-color: rgba(119, 199, 119, 1)
+    width: 50%; /* Additional styling if needed */
+    text-align: right;
 }
 
 .context-menu {

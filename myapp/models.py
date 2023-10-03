@@ -69,4 +69,20 @@ class Czesci(models.Model):
         db_table = 'czesci'
 
 
+class Operacje(models.Model):
+    id_zlecenie = models.ForeignKey('Zlecenia', models.DO_NOTHING, db_column='id_zlecenie')
+    id_czesc = models.ForeignKey(Czesci, models.DO_NOTHING, db_column='id_czesc', blank=True, null=True)
+    rodzaj_operacji = models.CharField(max_length=6, db_collation='SQL_Latin1_General_CP1_CI_AS')
+    ilosc = models.IntegerField()
+    jednostka = models.CharField(max_length=15, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+    cena_jednostkowa = models.DecimalField(max_digits=10, decimal_places=2)
+    stawka_vat = models.IntegerField()
+    opis = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'operacje'
+
+
+
 
