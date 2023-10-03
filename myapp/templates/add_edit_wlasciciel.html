@@ -1,15 +1,27 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} właściciela</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addedit.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} właściciela</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz</button>
-    </form>
-    <a href="{% url 'view_wlasciciele' %}">Powrót do Właścicieli</a>
+    <div class="header">
+        <div class="header-text font-nunito color-black size-24 bold-text">{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} właściciela</div>
+    </div>
+
+    <div class="main-block">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Zapisz</button>
+            <a href="{% url 'view_wlasciciele' %}" class="button">Powrót</a>
+        </form>
+    </div>
 </body>
 </html>

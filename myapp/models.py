@@ -35,6 +35,7 @@ class Wlasciciele(models.Model):
         managed = False
         db_table = 'wlasciciele'
 
+
 class Samochody(models.Model):
     wlasciciel = models.ForeignKey('Wlasciciele', models.DO_NOTHING, db_column='wlasciciel', blank=True, null=True)
     marka = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS')
@@ -45,6 +46,8 @@ class Samochody(models.Model):
     class Meta:
         managed = False
         db_table = 'samochody'
+
+
 class Zlecenia(models.Model):
     nr_samochodu = models.ForeignKey(Samochody, models.DO_NOTHING, db_column='nr_samochodu')
     opis = models.CharField(max_length=255, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
@@ -56,6 +59,7 @@ class Zlecenia(models.Model):
     class Meta:
         managed = False
         db_table = 'zlecenia'
+
 
 class Czesci(models.Model):
     nazwa = models.CharField(max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')
@@ -82,7 +86,3 @@ class Operacje(models.Model):
     class Meta:
         managed = False
         db_table = 'operacje'
-
-
-
-

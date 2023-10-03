@@ -16,31 +16,107 @@
 
     <div class="main-block">
         <div class="search-block">
-            <form method="get" action="{% url 'search_wlasciciele' %}">
-                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj właściciela..." value="{{ request.GET.q }}">
-                <button class="font-nunito size-18" type="submit">Wyszukaj</button>
-            </form>
-        </div>
-
-        <div class="add-new-block">
-            <form action="{% url 'add_wlasciciel' %}" method="get">
-                <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj Właściciela</button>
-            </form>
+            <div class="form-wrapper">
+                <form method="get" action="{% url 'search_wlasciciele' %}">
+                    <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj właściciela..." value="{{ request.GET.q }}">
+                    <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+                </form>
+            </div>
+            <div class="add-button-wrapper">
+                <form action="{% url 'add_wlasciciel' %}" method="get">
+                    <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj właściciela</button>
+                </form>
+            </div>
         </div>
 
         <div class="result-box font-nunito light-text size-18 color-white">
             {% for wlasciciel in wlasciciele %}
-                <div class="result-item" onclick="window.location='{% url 'search_samochody_wlasciciela' wlasciciel.id %}'">
-                    <span class="id-wlasciciel size-14">{{ wlasciciel.id }}</span>
-                    <div>{{ wlasciciel.imie }} {{wlasciciel.nazwisko}}</div>
+                <div class="result-item" onclick="window.location='{% url 'search_samochody_wlasciciela' wlasciciel.id %}';" oncontextmenu="showContextMenu(event, {{ wlasciciel.id }}); return false;">
+                    <div>{{wlasciciel.nazwisko}} {{ wlasciciel.imie }}</div>
                     <div><span class="size-14">tel:</span><br> {{ wlasciciel.telefon }}</div>
                     <div><span class="size-14">email:</span><br> {{ wlasciciel.email }}</div>
                 </div>
             {% endfor %}
         </div>
+
+        <div id="context-menu" class="context-menu font-nunito">
+            <div class="context-menu-item-edit" onclick="editCar()">Edytuj</div>
+            <div class="context-menu-item-delete" onclick="deleteCar()">Usuń</div>
+        </div>
+
+    </div>
+
+    <div id="delete-modal" class="modal">
+        <div class="modal-content font-nunito size-18 normal-text">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <p id="delete-question"></p>
+            <form id="delete-form" method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="samochod_id" id="delete-samochod-id">
+            <button type="button" onclick="confirmDelete()">Usuń</button>
+            <button type="button" onclick="closeModal()">Anuluj</button>
+        </form>
+        </div>
     </div>
 
     <div class="footer"></div>
+
+    <script>
+        var currentCarId = null;
+
+        function showContextMenu(event, wlascicielId) {
+            event.preventDefault();
+            var menu = document.getElementById('context-menu');
+            menu.style.left = event.pageX + 'px';
+            menu.style.top = event.pageY + 'px';
+            menu.classList.add('active');
+            currentWlascicielId = wlascicielId;
+            console.log('wlascicielId: ', currentWlascicielId);
+        }
+
+        function hideContextMenu() {
+            var menu = document.getElementById('context-menu');
+            menu.classList.remove('active');
+        }
+
+        function editCar() {
+            window.location = '{% url 'edit_wlasciciel' 0 %}'.replace('0', currentWlascicielId);
+            hideContextMenu();
+        }
+
+        function deleteCar() {
+            var modal = document.getElementById('delete-modal');
+            var question = document.getElementById('delete-question');
+            question.textContent = 'Czy na pewno chcesz usunąć właścicicela?';
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('delete-modal');
+            modal.style.display = "none";
+        }
+
+        function confirmDelete() {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{% url 'delete_wlasciciel' 0 %}'.replace('0', currentWlascicielId);
+            form.style.display = 'none';
+
+            // Include the CSRF token
+            var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'csrfmiddlewaretoken';
+            input.value = csrfToken;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Ukryj menu kontekstowe, gdy użytkownik kliknie gdzie indziej
+        window.addEventListener('click', hideContextMenu);
+    </script>
 
 </body>
 </html>

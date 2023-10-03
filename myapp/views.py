@@ -62,7 +62,7 @@ def delete_samochod(request, samochod_id):
         return HttpResponse("Niepoprawne żądanie", status=405)
 
 def view_wlasciciele(request):
-    wlasciciele = Wlasciciele.objects.all()
+    wlasciciele = Wlasciciele.objects.order_by('nazwisko')
     context = {
         'wlasciciele': wlasciciele
     }
@@ -100,6 +100,14 @@ def search_wlasciciele(request):
             Q(email__icontains=query)
         )
     return render(request, 'wlasciciele.html', {'wlasciciele': wlasciciele})
+
+def delete_wlasciciel(request, wlasciciel_id):
+    if request.method == 'POST':  # Upewnij się, że metoda żądania to POST
+        wlasciciel = get_object_or_404(Wlasciciele, id=wlasciciel_id)
+        wlasciciel.delete()
+        return redirect('view_wlasciciele')
+    else:
+        return HttpResponse("Niepoprawne żądanie", status=405)
 
 def view_czesci(request):
     czesci = Czesci.objects.all()

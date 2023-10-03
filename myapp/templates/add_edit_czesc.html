@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} Część</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addedit.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} Część</h1>

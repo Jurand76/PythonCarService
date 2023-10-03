@@ -13,6 +13,7 @@ urlpatterns = [
     path('wlasciciele/add/', views.add_wlasciciel, name='add_wlasciciel'),
     path('wlasciciele/edit/<int:wlasciciel_id>/', views.edit_wlasciciel, name='edit_wlasciciel'),
     path('wlasciciele/search/', views.search_wlasciciele, name='search_wlasciciele'),
+    path('wlasciciele/delete/<int:wlasciciel_id>/', views.delete_wlasciciel, name='delete_wlasciciel'),
     path('czesci/', views.view_czesci, name='view_czesci'),
     path('czesci/add/', views.add_czesc, name='add_czesc'),
     path('czesci/search/', views.search_czesci, name='search_czesci'),
