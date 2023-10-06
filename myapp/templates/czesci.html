@@ -52,8 +52,8 @@
                             <td class="data-item" style="text-align: center">
                                 <span class="select-item size-18 bold-text" onclick="increaseCount({{ czesc.id }})">+</span>&nbsp&nbsp
                                 <span class="select-item size-18 bold-text" onclick="decreaseCount({{ czesc.id }})">-</span>&nbsp&nbsp
-                                <span class="select-item size-18 bold-text">E</span>&nbsp&nbsp
-                                <span class="select-item size-18 bold-text">U</span>
+                                <a href="{% url 'edit_czesc' czesc.id %}" class="select-item size-18 bold-text">E</a>&nbsp&nbsp
+                                <a href="{% url 'delete_czesc' czesc.id %}" class="select-item size-18 bold-text" onclick="return confirmDelete();">U</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -103,6 +103,10 @@
                 }
             })
             .catch(error => console.error('Fetch error:', error));
+        }
+
+        function confirmDelete() {
+            return confirm("Czy na pewno chcesz usunąć tę część?");
         }
     </script>
 </body>

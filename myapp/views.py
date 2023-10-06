@@ -128,6 +128,17 @@ def add_czesc(request):
         form = CzesciForm()
     return render(request, 'add_edit_czesc.html', {'form': form})
 
+def edit_czesc(request, czesc_id):
+    czesc = get_object_or_404(Czesci, id=czesc_id)
+    if request.method == 'POST':
+        form = CzesciForm(request.POST, instance=czesc)
+        if form.is_valid():
+            form.save()
+            return redirect('view_czesci')
+    else:
+        form = CzesciForm(instance=czesc)
+    return render(request, 'add_edit_czesc.html', {'form': form})
+
 def zwieksz_ilosc_czesci(request):
     try:
         # Parse the JSON payload
@@ -170,6 +181,15 @@ def search_czesci(request):
             Q(cena_zakupu__icontains=query)
         )
     return render(request, 'czesci.html', {'czesci': czesci})
+
+def delete_czesc(request, czesc_id):
+    if request.method == 'POST':  # Upewnij się, że metoda żądania to POST
+        czesc = get_object_or_404(Wlasciciele, id=czesc_id)
+        czesc.delete()
+        return redirect('view_czesci')
+    else:
+        return HttpResponse("Niepoprawne żądanie", status=405)
+
 def view_zlecenia(request):
     zlecenia = Zlecenia.objects.all()
     context = {

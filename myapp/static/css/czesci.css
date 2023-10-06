@@ -127,6 +127,7 @@ h1 {
 .select-item {
     cursor: pointer;
     color: #777777;
+    text-decoration: none;
 }
 
 .select-item:hover {
