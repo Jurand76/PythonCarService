@@ -51,7 +51,7 @@
                             <td class="data-item">{{ czesc.stawka_vat }}%</td>
                             <td class="data-item" style="text-align: center">
                                 <span class="select-item size-18 bold-text" onclick="increaseCount({{ czesc.id }})">+</span>&nbsp&nbsp
-                                <span class="select-item size-18 bold-text">-</span>&nbsp&nbsp
+                                <span class="select-item size-18 bold-text" onclick="decreaseCount({{ czesc.id }})">-</span>&nbsp&nbsp
                                 <span class="select-item size-18 bold-text">E</span>&nbsp&nbsp
                                 <span class="select-item size-18 bold-text">U</span>
                             </td>
@@ -67,6 +67,26 @@
     <script>
         function increaseCount(itemId) {
             fetch('/czesci/zwieksz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is sent
+                },
+                body: JSON.stringify({id: itemId})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    console.error('Failed to update item count:', data.error);
+                }
+            })
+            .catch(error => console.error('Fetch error:', error));
+        }
+
+        function decreaseCount(itemId) {
+            fetch('/czesci/zmniejsz/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -144,6 +144,23 @@ def zwieksz_ilosc_czesci(request):
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
 
+def zmniejsz_ilosc_czesci(request):
+    try:
+        # Parse the JSON payload
+        data = json.loads(request.body.decode('utf-8'))
+        czesc_id = data.get('id')
+
+        # Update the count in the database
+        czesc = Czesci.objects.get(id=czesc_id)
+        if czesc.ilosc > 0:
+            czesc.ilosc -= 1
+            czesc.save()
+
+        return JsonResponse({'success': True})
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
+
 def search_czesci(request):
     query = request.GET.get('q')
     czesci = Czesci.objects.order_by('-id')[:10]  # Get the last 10 created items
