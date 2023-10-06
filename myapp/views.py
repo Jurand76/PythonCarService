@@ -1,9 +1,11 @@
+import json
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Samochody, Czesci, Wlasciciele, Zlecenia
 from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm
 from django.db.models import Q
-
+from django.http import JsonResponse
 
 
 def home(request):
@@ -126,6 +128,21 @@ def add_czesc(request):
         form = CzesciForm()
     return render(request, 'add_edit_czesc.html', {'form': form})
 
+def zwieksz_ilosc_czesci(request):
+    try:
+        # Parse the JSON payload
+        data = json.loads(request.body.decode('utf-8'))
+        czesc_id = data.get('id')
+
+        # Update the count in the database
+        czesc = Czesci.objects.get(id=czesc_id)
+        czesc.ilosc += 1
+        czesc.save()
+
+        return JsonResponse({'success': True})
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
 
 def search_czesci(request):
     query = request.GET.get('q')

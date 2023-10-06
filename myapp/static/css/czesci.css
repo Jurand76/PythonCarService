@@ -111,8 +111,8 @@ h1 {
     padding: 8px;  /* Optional: Add some padding */
 }
 
-.results-table .header-item:nth-child(1), .results-table .data-item:nth-child(1) { width: 50px; }
-.results-table .header-item:nth-child(2), .results-table .data-item:nth-child(2) { width: 500px; }
+.results-table .header-item:nth-child(1), .results-table .data-item:nth-child(1) { width: 30px; }
+.results-table .header-item:nth-child(2), .results-table .data-item:nth-child(2) { width: 520px; }
 .results-table .header-item:nth-child(3), .results-table .data-item:nth-child(3) { width: 100px; }
 .results-table .header-item:nth-child(4), .results-table .data-item:nth-child(4) { width: 150px; }
 .results-table .header-item:nth-child(5), .results-table .data-item:nth-child(5) { width: 100px; }
@@ -124,8 +124,21 @@ h1 {
     margin-top: -14px;
 }
 
+.select-item {
+    cursor: pointer;
+    color: #777777;
+}
+
+.select-item:hover {
+    color: lightgreen;
+}
+
 .search-block {
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 83%;
+    margin-bottom: 10px;
 }
 
 .search-block button {
@@ -156,6 +169,17 @@ h1 {
 
 .add-new-block button:hover {
     background-color: rgba(119, 199, 119, 1)
+}
+
+.form-wrapper {
+    /* Additional styling if needed */
+    width: 50%; /* Adjust this value to meet your design requirements */
+    text-align: left; /* Center the contents of the form */
+}
+
+.add-button-wrapper {
+    width: 50%; /* Additional styling if needed */
+    text-align: right;
 }
 
 
