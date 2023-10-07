@@ -26,3 +26,4 @@ urlpatterns = [
     path('zlecenia/search/', views.search_zlecenia, name='search_zlecenia'),
     path('zlecenia/<int:samochod_id>/', views.search_zlecenia_dla_samochodu, name='search_zlecenia_dla_samochodu'),
 ]
+ 
