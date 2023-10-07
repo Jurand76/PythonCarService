@@ -24,7 +24,7 @@
             </div>
             <div class="add-button-wrapper">
                 <form action="{% url 'add_wlasciciel' %}" method="get">
-                    <button class="font-nunito size-18" type="submit" class="btn btn-primary">Dodaj właściciela</button>
+                    <button class="font-nunito size-18 btn btn-primary" type="submit">Dodaj właściciela</button>
                 </form>
             </div>
         </div>
@@ -40,8 +40,8 @@
         </div>
 
         <div id="context-menu" class="context-menu font-nunito">
-            <div class="context-menu-item-edit" onclick="editCar()">Edytuj</div>
-            <div class="context-menu-item-delete" onclick="deleteCar()">Usuń</div>
+            <div class="context-menu-item-edit" onclick="editOwner()">Edytuj</div>
+            <div class="context-menu-item-delete" onclick="deleteOwner()">Usuń</div>
         </div>
 
     </div>
@@ -62,7 +62,7 @@
     <div class="footer"></div>
 
     <script>
-        var currentCarId = null;
+        var currentWlasciciel = null;
 
         function showContextMenu(event, wlascicielId) {
             event.preventDefault();
@@ -79,12 +79,12 @@
             menu.classList.remove('active');
         }
 
-        function editCar() {
+        function editOwner() {
             window.location = '{% url 'edit_wlasciciel' 0 %}'.replace('0', currentWlascicielId);
             hideContextMenu();
         }
 
-        function deleteCar() {
+        function deleteOwner() {
             var modal = document.getElementById('delete-modal');
             var question = document.getElementById('delete-question');
             question.textContent = 'Czy na pewno chcesz usunąć właścicicela?';

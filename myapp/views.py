@@ -184,7 +184,7 @@ def search_czesci(request):
 
 def delete_czesc(request, czesc_id):
     if request.method == 'POST':  # Upewnij się, że metoda żądania to POST
-        czesc = get_object_or_404(Wlasciciele, id=czesc_id)
+        czesc = get_object_or_404(Czesci, id=czesc_id)
         czesc.delete()
         return redirect('view_czesci')
     else:
