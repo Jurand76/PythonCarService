@@ -23,7 +23,10 @@ urlpatterns = [
     path('czesci/delete/<int:czesc_id>/', views.delete_czesc, name='delete_czesc'),
     path('zlecenia/', views.view_zlecenia, name='view_zlecenia'),
     path('zlecenia/add/', views.add_zlecenie, name='add_zlecenie'),
+    path('zlecenia/edit/<int:zlecenie_id>', views.edit_zlecenie, name='edit_zlecenie'),
     path('zlecenia/search/', views.search_zlecenia, name='search_zlecenia'),
     path('zlecenia/<int:samochod_id>/', views.search_zlecenia_dla_samochodu, name='search_zlecenia_dla_samochodu'),
+    path('zlecenia/details/<int:zlecenie_id><str:nr_rej>', views.search_operacje_dla_zlecenia, name='search_operacje_dla_zlecenia'),
+    path('operacja/add/<int:zlecenie_id><str:nr_rej>', views.add_operacja_dla_zlecenia, name='add_operacja_dla_zlecenia'),
 ]
  

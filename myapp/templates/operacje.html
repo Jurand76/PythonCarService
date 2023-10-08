@@ -1,0 +1,71 @@
+{% load static %}
+{% load math_filters %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baza zleceń</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/operacje.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-text font-nunito color-black size-24 bold-text">Szczegóły zlecenia dla nr rej: {{ nr_rej }}</div>
+    </div>
+
+    <div class="main-block">
+        <div class="search-block">
+            <div class="form-wrapper">
+                <form method="get" action="{% url 'search_operacje_dla_zlecenia' zlecenie_id nr_rej %}">
+                    <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj..." value="{{ request.GET.q }}">
+                    <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+                </form>
+            </div>
+            <div class="add-button-wrapper">
+                <form action="{% url 'add_operacja_dla_zlecenia' zlecenie_id nr_rej %}" method="get">
+                    <button class="font-nunito size-18 btn btn-primary" type="submit">Dodaj część/usługę</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="result-box font-nunito light-text size-14 color-white">
+            <table class="results-table font-nunito size-14">
+                <thead>
+                    <tr class="header-row">
+                        <th class="header-item">Opis</th>
+                        <th class="header-item">Ilość</th>
+                        <th class="header-item">Cena jedn.</th>
+                        <th class="header-item">Stawka VAT</th>
+                        <th class="header-item">Cena łączna</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {% for operacja in operacje %}
+                        <tr class="data-row size-14">
+                            <td class="data-item">
+                                {% if operacja.rodzaj_operacji|slice:":1" == "c" %}
+                                    {{ operacja.id_czesc.nazwa }}
+                                {% else %}
+                                    {{ operacja.opis }}
+                                {% endif %}
+                              </td>
+                            <td class="data-item">{{ operacja.ilosc }} {{ operacja.jednostka }}</td>
+                            <td class="data-item">{{ operacja.cena_jednostkowa }}</td>
+                            <td class="data-item">{{ operacja.stawka_vat }}%</td>
+                            <td class="data-item">{{ operacja.ilosc|multiply:operacja.cena_jednostkowa }}%</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+</body>
+</html>

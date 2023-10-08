@@ -16,23 +16,23 @@
 
     <div class="main-block">
         <div class="search-block">
-            <form method="get" action="{% url 'search_zlecenia' %}">
-                <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj zlecenie..." value="{{ request.GET.q }}">
-                <button class="font-nunito size-18" type="submit">Wyszukaj</button>
-            </form>
-        </div>
-
-        <div class="add-new-block">
-            <form action="{% url 'add_zlecenie' %}" method="get">
-                <button class="font-nunito size-18" type="submit" class="btn btn-primary">Nowe zlecenie</button>
-            </form>
+            <div class="form-wrapper">
+                <form method="get" action="{% url 'search_zlecenia' %}">
+                    <input class="font-nunito size-18" type="text" name="q" placeholder="wyszukaj zlecenie..." value="{{ request.GET.q }}">
+                    <button class="font-nunito size-18" type="submit">Wyszukaj</button>
+                </form>
+            </div>
+            <div class="add-button-wrapper">
+                <form action="{% url 'add_zlecenie' %}" method="get">
+                    <button class="font-nunito size-18 btn btn-primary" type="submit">Dodaj zlecenie</button>
+                </form>
+            </div>
         </div>
 
         <div class="result-box font-nunito light-text size-14 color-white">
             <table class="results-table font-nunito size-14">
                 <thead>
                     <tr class="header-row">
-                        <th class="header-item">Id</th>
                         <th class="header-item">Opis</th>
                         <th class="header-item">Wprowadzono</th>
                         <th class="header-item">Rozpoczęto</th>
@@ -42,8 +42,7 @@
                 </thead>
                 <tbody>
                     {% for zlecenie in zlecenia %}
-                        <tr class="data-row size-14">
-                            <td class="data-item">{{ zlecenie.id }}</td>
+                        <tr class="data-row size-14" onclick="window.location='{% url 'search_operacje_dla_zlecenia' zlecenie.id zlecenie.nr_samochodu.nrrej %}';">
                             <td class="data-item">
                                 <span class="color-orange size-12">{{ zlecenie.nr_samochodu.marka }} {{ zlecenie.nr_samochodu.model }},
                                                                    rej: {{ zlecenie.nr_samochodu.nrrej }}, przebieg: {{ zlecenie.przebieg }}km</span><br>
@@ -51,7 +50,10 @@
                             <td class="data-item">{{ zlecenie.czas_wprowadzenia|date:"Y-m-d"}}</td>
                             <td class="data-item">{{ zlecenie.czas_rozpoczecia|date:"Y-m-d"|default_if_none:"" }}</td>
                             <td class="data-item">{{ zlecenie.czas_zakonczenia|date:"Y-m-d"|default_if_none:"" }}</td>
-                            <td class="data-item">+ -</td>
+                            <td class="data-item" style="text-align: center">
+                                <a href="{% url 'edit_zlecenie' zlecenie.id %}" class="select-item size-18 bold-text">E</a>&nbsp&nbsp
+                                <span class="select-item size-18 bold-text" onclick="deleteZlecenie({{ zlecenie.id }});">U</span>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

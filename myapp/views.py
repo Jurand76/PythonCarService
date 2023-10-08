@@ -2,8 +2,8 @@ import json
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Samochody, Czesci, Wlasciciele, Zlecenia
-from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm
+from .models import Samochody, Czesci, Wlasciciele, Zlecenia, Operacje
+from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm, OperacjeForm
 from django.db.models import Q
 from django.http import JsonResponse
 
@@ -213,9 +213,9 @@ def search_zlecenia(request):
     if query:
         zlecenia = Zlecenia.objects.filter(
             Q(opis__icontains=query) |
-            Q(data_wprowadzenia__icontains=query) |
-            Q(data_rozpoczecia__icontains=query) |
-            Q(data_zakonczenia__icontains=query)
+            Q(czas_wprowadzenia__icontains=query) |
+            Q(czas_rozpoczecia__icontains=query) |
+            Q(czas_zakonczenia__icontains=query)
         )
 
     return render(request, 'zlecenia.html', {'zlecenia': zlecenia})
@@ -224,3 +224,33 @@ def search_zlecenia_dla_samochodu(request, samochod_id):
     samochod = get_object_or_404(Samochody, id=samochod_id)
     zlecenia = Zlecenia.objects.filter(nr_samochodu=samochod)
     return render(request, 'zlecenia.html', {'zlecenia': zlecenia})
+
+def edit_zlecenie(request, zlecenie_id):
+    zlecenie = get_object_or_404(Zlecenia, id=zlecenie_id)
+    if request.method == 'POST':
+        form = ZleceniaForm(request.POST, instance=zlecenie)
+        if form.is_valid():
+            form.save()
+            return redirect('view_zlecenia')
+    else:
+        form = ZleceniaForm(instance=zlecenie)
+    return render(request, 'add_edit_zlecenie.html', {'form': form})
+
+def search_operacje_dla_zlecenia(request, zlecenie_id, nr_rej):
+    operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
+    context = {
+        'operacje': operacje,
+        'zlecenie_id': zlecenie_id,
+        'nr_rej' : nr_rej
+    }
+    return render(request, 'operacje.html', context)
+
+def add_operacja_dla_zlecenia(request, zlecenie_id, nr_rej):
+    if request.method == 'POST':
+        form = OperacjeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('search_operacje_dla_zlecenia', zlecenie_id=zlecenie_id, nr_rej=nr_rej)
+    else:
+        form = OperacjeForm(initial={'id_zlecenie': zlecenie_id})
+    return render(request, 'add_edit_operacje.html', {'form': form, 'zlecenie_id': zlecenie_id, 'nr_rej': nr_rej})

@@ -32,6 +32,8 @@ class ZleceniaForm(forms.ModelForm):
         fields = ['nr_samochodu', 'czas_wprowadzenia', 'czas_rozpoczecia', 'czas_zakonczenia', 'opis', 'przebieg']
 
 class OperacjeForm(forms.ModelForm):
+    rodzaj_operacji = forms.ChoiceField(choices=[('czesc', 'Część'), ('usluga', 'Usługa')])
+
     class Meta:
         model = Operacje
         fields = ['id_zlecenie', 'id_czesc', 'rodzaj_operacji', 'ilosc', 'jednostka', 'cena_jednostkowa', 'stawka_vat', 'opis']

@@ -43,6 +43,8 @@ class Samochody(models.Model):
     nrvin = models.CharField(max_length=30, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
     nrrej = models.CharField(max_length=20, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)
 
+    def __str__(self):
+        return f'{self.marka} {self.model} nr rej: {self.nrrej}'
     class Meta:
         managed = False
         db_table = 'samochody'
