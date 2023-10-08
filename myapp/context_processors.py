@@ -8,13 +8,47 @@ def ongoing_orders(request):
         czas_rozpoczecia__lt=timezone.now()
     )
 
-    order_details = []
+    ongoing_orders = []
     for order in orders:
-        order_details.append({
+        ongoing_orders.append({
             'order': order,
             'marka': order.nr_samochodu.marka,
             'model': order.nr_samochodu.model,
             'nrrej': order.nr_samochodu.nrrej,
         })
 
-    return {'order_details': order_details}
+    return {'ongoing_orders': ongoing_orders}
+
+def finished_orders(request):
+    orders = Zlecenia.objects.filter(
+        czas_rozpoczecia__isnull=False,
+        czas_zakonczenia__isnull=False,
+    )
+
+    finished_orders = []
+    for order in orders:
+        finished_orders.append({
+            'order': order,
+            'marka': order.nr_samochodu.marka,
+            'model': order.nr_samochodu.model,
+            'nrrej': order.nr_samochodu.nrrej,
+        })
+
+    return {'finished_orders': finished_orders}
+
+def future_orders(request):
+    orders = Zlecenia.objects.filter(
+        czas_rozpoczecia__isnull=True,
+        czas_zakonczenia__isnull=True,
+    )
+
+    future_orders = []
+    for order in orders:
+        future_orders.append({
+            'order': order,
+            'marka': order.nr_samochodu.marka,
+            'model': order.nr_samochodu.model,
+            'nrrej': order.nr_samochodu.nrrej,
+        })
+
+    return {'future_orders': future_orders}

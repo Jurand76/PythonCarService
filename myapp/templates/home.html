@@ -30,8 +30,8 @@
     <div class="footer">
         <div class="first-block">
             <h4>Zlecenia w trakcie</h4>
-            {% if order_details %}
-                 {% for order in order_details %}
+            {% if ongoing_orders %}
+                 {% for order in ongoing_orders %}
                      <div class="second-block size-12">
                          <div class="third-block color-yellow">Rozpoczęte: {{ order.order.czas_rozpoczecia|date:"d-m-Y" }}</div>
                          <div class="third-block">{{ order.marka }} {{ order.model }} nr rej. {{ order.nrrej }}</div>
@@ -42,8 +42,35 @@
                  <div class="second-block">Brak trwających prac</div>
             {% endif %}
         </div>
-        <div class="first-block">
 
+         <div class="first-block">
+            <h4>Zlecenia zakończone</h4>
+            {% if finished_orders %}
+                 {% for order in finished_orders %}
+                     <div class="second-block size-12">
+                         <div class="third-block color-yellow">Zakończone: {{ order.order.czas_zakonczenia|date:"d-m-Y" }}</div>
+                         <div class="third-block">{{ order.marka }} {{ order.model }} nr rej. {{ order.nrrej }}</div>
+                         <div class="third-block">{{ order.order.opis }}</div>
+                     </div>
+                 {% endfor %}
+            {% else %}
+                 <div class="second-block">Nie ma zakończonych zleceń</div>
+            {% endif %}
+        </div>
+
+        <div class="first-block">
+             <h4>Zlecenia nadchodzące</h4>
+            {% if future_orders %}
+                 {% for order in future_orders %}
+                     <div class="second-block size-12">
+                         <div class="third-block color-yellow">Wprowadzone: {{ order.order.czas_wprowadzenia|date:"d-m-Y" }}</div>
+                         <div class="third-block">{{ order.marka }} {{ order.model }} nr rej. {{ order.nrrej }}</div>
+                         <div class="third-block">{{ order.order.opis }}</div>
+                     </div>
+                 {% endfor %}
+            {% else %}
+                 <div class="second-block">Nie ma zaplanowanych zleceń</div>
+            {% endif %}
         </div>
     </div>
 </body>
