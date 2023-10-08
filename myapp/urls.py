@@ -28,5 +28,6 @@ urlpatterns = [
     path('zlecenia/<int:samochod_id>/', views.search_zlecenia_dla_samochodu, name='search_zlecenia_dla_samochodu'),
     path('zlecenia/details/<int:zlecenie_id>', views.search_operacje_dla_zlecenia, name='search_operacje_dla_zlecenia'),
     path('operacja/add/<int:zlecenie_id>', views.add_operacja_dla_zlecenia, name='add_operacja_dla_zlecenia'),
+    path('wydruk/<int:zlecenie_id>/', views.faktura_wydruk, name='faktura_wydruk'),
 ]
  

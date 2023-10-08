@@ -7,6 +7,7 @@ from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm, Opera
 from django.db.models import Q
 from django.http import JsonResponse
 from django.utils import timezone
+from decimal import Decimal
 
 
 def home(request):
@@ -252,12 +253,15 @@ def edit_zlecenie(request, zlecenie_id):
     return render(request, 'add_edit_zlecenie.html', {'form': form})
 
 def search_operacje_dla_zlecenia(request, zlecenie_id):
+    zlecenie = get_object_or_404(Zlecenia, pk=zlecenie_id)
     operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
     suma = sum(op.ilosc * op.cena_jednostkowa for op in operacje)
+    nr_rej = zlecenie.nr_samochodu.nrrej
     context = {
         'operacje': operacje,
         'zlecenie_id': zlecenie_id,
         'suma': suma,
+        'nr_rej': nr_rej
     }
     return render(request, 'operacje.html', context)
 
@@ -273,3 +277,43 @@ def add_operacja_dla_zlecenia(request, zlecenie_id):
     else:
         form = OperacjeForm(initial={'id_zlecenie': zlecenie_id})
     return render(request, 'add_edit_operacje.html', {'form': form, 'zlecenie_id': zlecenie_id})
+
+def faktura_wydruk(request, zlecenie_id):
+    zlecenie = get_object_or_404(Zlecenia, pk=zlecenie_id)
+    operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
+
+    # Listy do przechowywania obliczonych wartości netto i VAT dla każdej operacji
+    operacje_netto = []
+    operacje_vat = []
+
+    # Zmienne do przechowywania łącznych wartości
+    suma = 0
+    suma_netto = 0
+    suma_vat = 0
+
+    for op in operacje:
+        wartosc = op.ilosc * op.cena_jednostkowa
+        suma += wartosc
+
+        netto = wartosc / (Decimal('1') + op.stawka_vat / Decimal('100'))
+        vat = wartosc - netto
+
+        # Dodaj obliczone wartości do odpowiednich list
+        operacje_netto.append(netto)
+        operacje_vat.append(vat)
+
+        suma_netto += netto
+        suma_vat += vat
+
+    # Spakowanie operacji, ich wartości netto i VAT do jednej listy dla łatwiejszego dostępu w szablonie
+    operacje_details = zip(operacje, operacje_netto, operacje_vat)
+
+    context = {
+        'zlecenie': zlecenie,
+        'operacje_details': operacje_details,
+        'suma': suma,
+        'suma_netto': suma_netto,
+        'suma_vat': suma_vat,
+    }
+
+    return render(request, 'wydruk.html', context)

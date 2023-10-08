@@ -1,0 +1,42 @@
+{% load static %}
+{% load math_filters %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baza właścicieli</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/wydruk.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<table>
+    <thead>
+        <tr class="header-row size-16">
+            <th class="header-item">Opis</th>
+            <th class="header-item">Ilość</th>
+            <th class="header-item">Cena jednostkowa</th>
+            <th class="header-item">Stawka VAT</th>
+            <th class="header-item">Netto</th>
+            <th class="header-item">VAT</th>
+            <th class="header-item">Brutto</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for operacja, netto, vat in operacje_details %}
+        <tr class="data-row size-14">
+            <td class="data-item">{{ operacja.opis }}</td>
+            <td class="data-item">{{ operacja.ilosc }}</td>
+            <td class="data-item">{{ operacja.cena_jednostkowa }}</td>
+            <td class="data-item">{{ operacja.stawka_vat }}%</td>
+            <td class="data-item">{{ netto }} PLN</td>
+            <td class="data-item">{{ vat }} PLN</td>
+            <td class="data-item">{{ operacja.ilosc|multiply:operacja.cena_jednostkowa }} PLN</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
