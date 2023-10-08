@@ -21,6 +21,12 @@
             <a href="{% url 'view_zlecenia' %}" class="button">Powrót</a>
         </form>
     </div>
-    <div class="footer"></div>
+    <div class="footer font-nunito">
+        <div class="footer-item"><a href="{% url 'home' %}">Strona główna</a></div>
+        <div class="footer-item"><a href="{% url 'view_wlasciciele' %}">Klienci</a></div>
+        <div class="footer-item"><a href="{% url 'view_czesci' %}">Części</a></div>
+        <div class="footer-item"><a href="{% url 'view_samochody' %}">Samochody</a></div>
+        <div class="footer-item"><a href="{% url 'view_zlecenia' %}">Zlecenia</a></div>
+    </div>
 </body>
 </html>
