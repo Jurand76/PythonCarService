@@ -236,21 +236,23 @@ def edit_zlecenie(request, zlecenie_id):
         form = ZleceniaForm(instance=zlecenie)
     return render(request, 'add_edit_zlecenie.html', {'form': form})
 
-def search_operacje_dla_zlecenia(request, zlecenie_id, nr_rej):
+def search_operacje_dla_zlecenia(request, zlecenie_id):
     operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
     context = {
         'operacje': operacje,
         'zlecenie_id': zlecenie_id,
-        'nr_rej' : nr_rej
     }
     return render(request, 'operacje.html', context)
 
-def add_operacja_dla_zlecenia(request, zlecenie_id, nr_rej):
+def add_operacja_dla_zlecenia(request, zlecenie_id):
     if request.method == 'POST':
         form = OperacjeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('search_operacje_dla_zlecenia', zlecenie_id=zlecenie_id, nr_rej=nr_rej)
+            return redirect('search_operacje_dla_zlecenia', zlecenie_id=zlecenie_id)
+        else:
+            print("Form errors: ", form.errors)
+            print("POST data: ", request.POST)
     else:
         form = OperacjeForm(initial={'id_zlecenie': zlecenie_id})
-    return render(request, 'add_edit_operacje.html', {'form': form, 'zlecenie_id': zlecenie_id, 'nr_rej': nr_rej})
+    return render(request, 'add_edit_operacje.html', {'form': form, 'zlecenie_id': zlecenie_id})

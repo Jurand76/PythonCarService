@@ -32,11 +32,32 @@ class ZleceniaForm(forms.ModelForm):
         fields = ['nr_samochodu', 'czas_wprowadzenia', 'czas_rozpoczecia', 'czas_zakonczenia', 'opis', 'przebieg']
 
 class OperacjeForm(forms.ModelForm):
-    rodzaj_operacji = forms.ChoiceField(choices=[('czesc', 'Część'), ('usluga', 'Usługa')])
+    rodzaj_operacji = forms.ChoiceField(choices=[('', 'Wybierz...'), ('c', 'Część'), ('u', 'Usługa'), ('i', 'Inne')])
 
     class Meta:
         model = Operacje
         fields = ['id_zlecenie', 'id_czesc', 'rodzaj_operacji', 'ilosc', 'jednostka', 'cena_jednostkowa', 'stawka_vat', 'opis']
 
+    def __init__(self, *args, **kwargs):
+        super(OperacjeForm, self).__init__(*args, **kwargs)
+        self.fields['id_zlecenie'].widget = forms.HiddenInput()
+        self.fields['id_czesc'] = forms.ModelChoiceField(
+            queryset=Czesci.objects.all(),
+            to_field_name="nazwa",
+            required=False  # Opcjonalne, ustaw jeśli pole może być puste
+        )
 
+        # Jeśli rodzaj_operacji jest zdefiniowany, dostosuj dostępne opcje.
+        if 'data' in kwargs:
+            rodzaj_operacji = kwargs['data'].get('rodzaj_operacji')
+            self._adjust_fields(rodzaj_operacji)
+        elif self.instance.pk:
+            self._adjust_fields(self.instance.rodzaj_operacji)
+
+    def _adjust_fields(self, rodzaj_operacji):
+        if rodzaj_operacji == 'c':
+            self.fields['id_czesc'].queryset = Czesci.objects.all()
+            self.fields['opis'].required = False
+        elif rodzaj_operacji == 'u':
+            self.fields['id_czesc'].required = False
 

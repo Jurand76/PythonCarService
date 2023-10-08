@@ -70,6 +70,8 @@ class Czesci(models.Model):
     jednostka = models.CharField(max_length=10, db_collation='SQL_Latin1_General_CP1_CI_AS')
     stawka_vat = models.IntegerField(blank=True, null=True)
 
+    def __str__(self):
+        return self.nazwa
     class Meta:
         managed = False
         db_table = 'czesci'

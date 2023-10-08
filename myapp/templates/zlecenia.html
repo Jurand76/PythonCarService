@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     {% for zlecenie in zlecenia %}
-                        <tr class="data-row size-14" onclick="window.location='{% url 'search_operacje_dla_zlecenia' zlecenie.id zlecenie.nr_samochodu.nrrej %}';">
+                        <tr class="data-row size-14" onclick="window.location='{% url 'search_operacje_dla_zlecenia' zlecenie.id %}';">
                             <td class="data-item">
                                 <span class="color-orange size-12">{{ zlecenie.nr_samochodu.marka }} {{ zlecenie.nr_samochodu.model }},
                                                                    rej: {{ zlecenie.nr_samochodu.nrrej }}, przebieg: {{ zlecenie.przebieg }}km</span><br>

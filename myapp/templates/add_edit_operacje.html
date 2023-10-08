@@ -9,16 +9,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="header">
         <div class="header-text font-nunito color-black size-24 bold-text">{% if form.instance.pk %}Edytuj{% else %}Dodaj{% endif %} operację</div>
     </div>
-      <div class="main-block">
+    <div class="main-block">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Zapisz</button>
-            <a href="{% url 'search_operacje_dla_zlecenia' zlecenie_id nr_rej %}" class="button">Powrót</a>
+            <a href="{% url 'search_operacje_dla_zlecenia' zlecenie_id %}" class="button">Powrót</a>
         </form>
     </div>
     <div class="footer"></div>
