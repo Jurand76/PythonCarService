@@ -18,15 +18,33 @@
             <a href="/wlasciciele" class="front">
                 <div class="block front customer"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">KLIENCI</span></div></a>
             <a href="/czesci" class="front">
-                <div class="block front parts"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">CZĘŚCI</span></div>
+                <div class="block front parts"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">CZĘŚCI</span></div></a>
             <a href="/samochody" class="front">
                 <div class="block front cars"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">SAMOCHODY</span></div></a>
              <a href="/zlecenia" class="front">
-                 <div class="block front orders"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">ZLECENIA</span></div></a>
-        </div>
+                <div class="block front orders"><span class="font-nunito bold-text color-white size-18 margin-120 outer-black">ZLECENIA</span></div></a>
+            </div>
     </div>
     <div class="bottom-block">
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div class="first-block">
+            <h4>Zlecenia w trakcie</h4>
+            {% if order_details %}
+                 {% for order in order_details %}
+                     <div class="second-block size-12">
+                         <div class="third-block color-yellow">Rozpoczęte: {{ order.order.czas_rozpoczecia|date:"d-m-Y" }}</div>
+                         <div class="third-block">{{ order.marka }} {{ order.model }} nr rej. {{ order.nrrej }}</div>
+                         <div class="third-block">{{ order.order.opis }}</div>
+                     </div>
+                 {% endfor %}
+            {% else %}
+                 <div class="second-block">Brak trwających prac</div>
+            {% endif %}
+        </div>
+        <div class="first-block">
+
+        </div>
+    </div>
 </body>
 </html>

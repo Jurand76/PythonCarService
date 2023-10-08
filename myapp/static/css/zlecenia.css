@@ -121,6 +121,10 @@ h1 {
     font-weight: 900;
 }
 
+tr:hover {
+    background-color: rgba(119, 169, 119, 0.85);
+}
+
 .result-box {
     display: flex;
     flex-direction: column;
@@ -160,6 +164,16 @@ h1 {
     width: 30px;
     margin-left: 5px;
     margin-top: -14px;
+}
+
+.select-item {
+    cursor: pointer;
+    color: #777777;
+    text-decoration: none;
+}
+
+.select-item:hover {
+    color: lightgreen;
 }
 
 .search-block {

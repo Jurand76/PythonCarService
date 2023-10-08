@@ -6,10 +6,25 @@ from .models import Samochody, Czesci, Wlasciciele, Zlecenia, Operacje
 from .forms import SamochodForm, WlascicielForm, CzesciForm, ZleceniaForm, OperacjeForm
 from django.db.models import Q
 from django.http import JsonResponse
+from django.utils import timezone
 
 
 def home(request):
     return render(request, 'home.html')
+
+def my_view(request):
+    # Pobranie zleceń, które mają czas rozpoczęcia, ale nie mają czasu zakończenia,
+    # i których czas rozpoczęcia jest wcześniejszy niż obecna data.
+    ongoing_orders = Zlecenia.objects.filter(
+        czas_rozpoczecia__isnull=False,
+        czas_zakonczenia__isnull=True,
+        czas_rozpoczecia__lt=timezone.now()
+    )
+
+    # Przekazanie zleceń do kontekstu szablonu.
+    context = {'ongoing_orders': ongoing_orders}
+
+    return render(request, 'home.html', context)
 
 def view_samochody(request):
     samochody = Samochody.objects.all()
