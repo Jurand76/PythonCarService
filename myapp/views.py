@@ -238,9 +238,11 @@ def edit_zlecenie(request, zlecenie_id):
 
 def search_operacje_dla_zlecenia(request, zlecenie_id):
     operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
+    suma = sum(op.ilosc * op.cena_jednostkowa for op in operacje)
     context = {
         'operacje': operacje,
         'zlecenie_id': zlecenie_id,
+        'suma': suma,
     }
     return render(request, 'operacje.html', context)
 

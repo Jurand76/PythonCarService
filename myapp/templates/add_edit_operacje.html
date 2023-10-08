@@ -23,5 +23,48 @@
         </form>
     </div>
     <div class="footer"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+    function toggleFields(rodzaj_operacji) {
+        // Domyślnie ukrywaj wszystko
+        document.getElementById('id_id_czesc').closest('p').style.display = 'none';
+        document.getElementById('id_ilosc').closest('p').style.display = 'none';
+        document.getElementById('id_cena_jednostkowa').closest('p').style.display = 'none';
+        document.getElementById('id_stawka_vat').closest('p').style.display = 'none';
+        document.getElementById('id_jednostka').closest('p').style.display = 'none';
+        document.getElementById('id_opis').closest('p').style.display = 'none';
+
+        if (rodzaj_operacji === "c") {
+            // Jeśli 'c', pokaż odpowiednie pola dla dodania części
+            document.getElementById('id_id_czesc').closest('p').style.display = 'block';
+            document.getElementById('id_ilosc').closest('p').style.display = 'block';
+            document.getElementById('id_cena_jednostkowa').closest('p').style.display = 'block';
+            document.getElementById('id_jednostka').closest('p').style.display = 'block';
+            document.getElementById('id_stawka_vat').closest('p').style.display = 'block';
+            document.getElementById('id_opis').closest('p').style.display = 'none';
+        }
+
+        if (rodzaj_operacji === "u" | rodzaj_operacji === "i") {
+            // Jeśli 'i' lub 'u', pokaż odpowiednie pola dla dodania usługi lub części spoza magazynu
+            document.getElementById('id_id_czesc').closest('p').style.display = 'none';
+            document.getElementById('id_ilosc').closest('p').style.display = 'block';
+            document.getElementById('id_cena_jednostkowa').closest('p').style.display = 'block';
+            document.getElementById('id_jednostka').closest('p').style.display = 'block';
+            document.getElementById('id_stawka_vat').closest('p').style.display = 'block';
+            document.getElementById('id_opis').closest('p').style.display = 'block';
+        }
+    }
+
+    // Na zmianę rodzaj_operacji, wywołaj funkcję toggleFields()
+    document.getElementById('id_rodzaj_operacji').addEventListener('change', function() {
+        toggleFields(this.value);
+    });
+
+    // Wywołaj funkcję toggleFields() przy ładowaniu strony z wartością początkową rodzaj_operacji
+    toggleFields(document.getElementById('id_rodzaj_operacji').value);
+});
+</script>
 </body>
 </html>

@@ -36,7 +36,7 @@ class OperacjeForm(forms.ModelForm):
 
     class Meta:
         model = Operacje
-        fields = ['id_zlecenie', 'id_czesc', 'rodzaj_operacji', 'ilosc', 'jednostka', 'cena_jednostkowa', 'stawka_vat', 'opis']
+        fields = ['id_zlecenie', 'rodzaj_operacji', 'opis', 'id_czesc', 'cena_jednostkowa', 'ilosc', 'jednostka', 'stawka_vat']
 
     def __init__(self, *args, **kwargs):
         super(OperacjeForm, self).__init__(*args, **kwargs)
