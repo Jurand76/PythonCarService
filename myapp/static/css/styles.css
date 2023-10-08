@@ -52,6 +52,14 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+.first-block h4 {
+    border-bottom: 2px solid #333;
+    width: 90%;
+    text-align: center;
+    align-content: center;
+    margin-left: 5%
+}
+
 .second-block {
     margin-left: 20px;
     margin-bottom: 10px;
@@ -64,8 +72,9 @@ h1 {
 h4 {
     color: white;
     font-family: 'Nunito', sans-serif;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 4px;
     text-align: center;
 }
 
