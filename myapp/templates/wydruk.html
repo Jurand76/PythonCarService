@@ -12,31 +12,48 @@
 </head>
 
 <body>
-<table>
-    <thead>
-        <tr class="header-row size-16">
-            <th class="header-item">Opis</th>
-            <th class="header-item">Ilość</th>
-            <th class="header-item">Cena jednostkowa</th>
-            <th class="header-item">Stawka VAT</th>
-            <th class="header-item">Netto</th>
-            <th class="header-item">VAT</th>
-            <th class="header-item">Brutto</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for operacja, netto, vat in operacje_details %}
-        <tr class="data-row size-14">
-            <td class="data-item">{{ operacja.opis }}</td>
-            <td class="data-item">{{ operacja.ilosc }}</td>
-            <td class="data-item">{{ operacja.cena_jednostkowa }}</td>
-            <td class="data-item">{{ operacja.stawka_vat }}%</td>
-            <td class="data-item">{{ netto }} PLN</td>
-            <td class="data-item">{{ vat }} PLN</td>
-            <td class="data-item">{{ operacja.ilosc|multiply:operacja.cena_jednostkowa }} PLN</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+
+    <h1>Zlecenie nr {{ zlecenie.id }}</h1>
+    <p>Właściciel: {{ zlecenie.nr_samochodu.wlasciciel.imie }} {{ zlecenie.nr_samochodu.wlasciciel.nazwisko }}</p>
+    <p>Samochód: {{ zlecenie.nr_samochodu.marka }} {{ zlecenie.nr_samochodu.model }}, nr rej.: {{ zlecenie.nr_samochodu.nrrej }}</p>
+    <p>Przebieg: {{ zlecenie.przebieg }} km</p>
+    <p>Data zlecenia: {{ zlecenie.czas_wprowadzenia|date:"d/m/Y" }}</p>
+
+    <table>
+        <thead>
+            <tr class="header-row size-16">
+                <th class="header-item">Lp.</th>
+                <th class="header-item">Opis</th>
+                <th class="header-item-centered">Ilość</th>
+                <th class="header-item-centered">Cena jedn. brutto<br>PLN</th>
+                <th class="header-item-centered">Stawka VAT</th>
+                <th class="header-item-centered">Netto<br>PLN</th>
+                <th class="header-item-centered">Kwota VAT<br>PLN</th>
+                <th class="header-item-centered">Brutto<br>PLN</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for operacja in operacje_details %}
+            <tr class="data-row size-12">
+                <td class="data-item">{{ forloop.counter }}</td>
+                <td class="data-item">{{ operacja.opis }}</td>
+                <td class="data-item">{{ operacja.ilosc }} {{ operacja.jednostka }}</td>
+                <td class="data-item-value">{{ operacja.cena_jedn_brutto }}</td>
+                <td class="data-item-centered">{{ operacja.stawka_vat }}%</td>
+                <td class="data-item-value">{{ operacja.cena_netto|floatformat:2 }}</td>
+                <td class="data-item-value">{{ operacja.kwota_vat|floatformat:2 }}</td>
+                <td class="data-item-value">{{ operacja.cena_brutto|floatformat:2 }}</td>
+            </tr>
+        {% endfor %}
+            <tr class="total-row size-12">
+                <td class="data-item" colspan="5">RAZEM</td>
+                <td class="data-item-value">{{ suma_netto|floatformat:2 }}</td>
+                <td class="data-item-value">{{ suma_vat|floatformat:2 }}</td>
+                <td class="data-item-value">{{ suma|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

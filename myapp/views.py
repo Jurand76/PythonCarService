@@ -291,22 +291,30 @@ def faktura_wydruk(request, zlecenie_id):
     suma_netto = 0
     suma_vat = 0
 
-    for op in operacje:
-        wartosc = op.ilosc * op.cena_jednostkowa
-        suma += wartosc
+    operacje_details = []
 
-        netto = wartosc / (Decimal('1') + op.stawka_vat / Decimal('100'))
-        vat = wartosc - netto
+    for operacja in operacje:
+        print('Rodzaj operacji:', operacja.rodzaj_operacji, 'długość:', len(operacja.rodzaj_operacji))
+        opis = operacja.opis if operacja.rodzaj_operacji[0] in ["u", "i"] else operacja.id_czesc.nazwa
+        cena_brutto = operacja.cena_jednostkowa * operacja.ilosc
+        cena_netto = cena_brutto / (Decimal('1') + operacja.stawka_vat / Decimal('100'))
+        kwota_vat = cena_brutto - cena_netto
 
-        # Dodaj obliczone wartości do odpowiednich list
-        operacje_netto.append(netto)
-        operacje_vat.append(vat)
+        operacje_details.append({
+            'opis': opis,
+            'cena_jedn_brutto': operacja.cena_jednostkowa,
+            'ilosc': operacja.ilosc,
+            'jednostka': operacja.jednostka,
+            'cena_brutto': cena_brutto,
+            'stawka_vat': operacja.stawka_vat,
+            'kwota_vat': kwota_vat,
+            'cena_netto': cena_netto,
+        })
 
-        suma_netto += netto
-        suma_vat += vat
+        suma += cena_brutto
+        suma_netto += cena_netto
+        suma_vat += kwota_vat
 
-    # Spakowanie operacji, ich wartości netto i VAT do jednej listy dla łatwiejszego dostępu w szablonie
-    operacje_details = zip(operacje, operacje_netto, operacje_vat)
 
     context = {
         'zlecenie': zlecenie,
