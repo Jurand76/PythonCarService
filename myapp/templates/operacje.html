@@ -27,6 +27,9 @@
                 <form action="{% url 'add_operacja_dla_zlecenia' zlecenie_id %}" method="get">
                     <button class="font-nunito size-18 btn btn-primary" type="submit">Dodaj część/usługę</button>
                 </form>
+                <form action="{% url 'zlecenie_wydruk' zlecenie_id %}" method="get" target="_blank">
+                    <button class="font-nunito size-18 btn btn-primary" type="submit">Drukuj</button>
+                </form>
             </div>
         </div>
 

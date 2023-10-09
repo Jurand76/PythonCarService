@@ -278,7 +278,7 @@ def add_operacja_dla_zlecenia(request, zlecenie_id):
         form = OperacjeForm(initial={'id_zlecenie': zlecenie_id})
     return render(request, 'add_edit_operacje.html', {'form': form, 'zlecenie_id': zlecenie_id})
 
-def faktura_wydruk(request, zlecenie_id):
+def zlecenie_wydruk(request, zlecenie_id):
     zlecenie = get_object_or_404(Zlecenia, pk=zlecenie_id)
     operacje = Operacje.objects.filter(id_zlecenie=zlecenie_id)
 

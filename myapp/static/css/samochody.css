@@ -176,6 +176,7 @@ h1 {
 .add-button-wrapper {
     width: 50%; /* Additional styling if needed */
     text-align: right;
+    display: inline-block;
 }
 
 .context-menu {

@@ -182,6 +182,28 @@ h1 {
     background-color: rgba(119, 199, 119, 1)
 }
 
+.form-wrapper {
+    /* Additional styling if needed */
+    width: 50%; /* Adjust this value to meet your design requirements */
+    text-align: left; /* Center the contents of the form */
+    display: inline-block;
+}
+
+form {
+    display: inline-block;
+}
+
+.add-button-wrapper {
+    width: 50%; /* Additional styling if needed */
+    text-align: right;
+    display: inline-block
+}
+
+.add-button-wrapper button {
+    width: 150px; /* Additional styling if needed */
+}
+
+
 .add-new-block {
     padding: 8px;
     margin-bottom: 5px;
